@@ -1,8 +1,7 @@
 {
   "name": "electrondevops",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "electrondevops a minimal Electron application",
-  "main": "main.js",
   "build": {
     "appId": "digital.lifeforce.electrondevops",
     "productName": "electrondevops",
@@ -24,7 +23,8 @@
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
     "postinstall": "electron-builder install-app-deps",
-    "build": "npm run compile"
+    "build": "npm run compile",
+    "release": "electron-builder --mac --windows --linux --publish always"
   },
   "repository": "https://github.com/Lifeforce-Digital/electron-devops",
   "keywords": [
