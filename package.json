@@ -1,12 +1,32 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "electrondevops",
+  "version": "0.0.1",
+  "description": "electrondevops a minimal Electron application",
   "main": "main.js",
-  "scripts": {
-    "start": "electron ."
+  "build": {
+    "appId": "digital.lifeforce.electrondevops",
+    "productName": "electrondevops",
+    "mac": {
+      "category": "public.app-category.lifestyle"
+    },
+    "dmg": {
+      "icon": false
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Office"
+    }
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "postinstall": "electron-builder install-app-deps",
+    "build": "npm run compile"
+  },
+  "repository": "https://github.com/Lifeforce-Digital/electron-devops",
   "keywords": [
     "Electron",
     "quick",
@@ -16,7 +36,13 @@
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
+  "dependencies": {
+    "source-map-support": "^0.5.16"
+  },
   "devDependencies": {
-    "electron": "^11.2.1"
+    "electron": "8.2.0",
+    "electron-builder": "^22.4.1",
+    "electron-webpack": "^2.8.2",
+    "webpack": "~4.42.1"
   }
 }
