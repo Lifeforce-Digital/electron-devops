@@ -56,7 +56,9 @@ app.on('activate', () => {
   }
 })
 
+const autoUpdater = require("electron-updater");
 // create main BrowserWindow when electron is ready
 app.on('ready', () => {
+  autoUpdater.checkForUpdatesAndNotify();
   mainWindow = createMainWindow()
 })
