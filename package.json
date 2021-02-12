@@ -1,6 +1,6 @@
 {
   "name": "electrondevops",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "electrondevops a minimal Electron application",
   "build": {
     "appId": "digital.lifeforce.electrondevops",
