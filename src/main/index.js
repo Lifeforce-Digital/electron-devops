@@ -3,7 +3,7 @@
 import { app, BrowserWindow, ipcMain  } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
-const appVersion = '0.0.12';
+const appVersion = '0.0.13';
 // import updateApp from "./updater";
 
 const log = require('electron-log');

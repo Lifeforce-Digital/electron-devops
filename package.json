@@ -1,6 +1,6 @@
 {
   "name": "electrondevops",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "electrondevops a minimal Electron application",
   "build": {
     "appId": "digital.lifeforce.electrondevops",
@@ -21,6 +21,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "npm run bundle && electron-webpack dev",
+    "compile": "electron-webpack",
     "postinstall": "electron-builder install-app-deps",
     "release": "electron-builder --mac --windows --linux --publish always",
     "bundle": "webpack --mode production"
