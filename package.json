@@ -1,6 +1,6 @@
 {
   "name": "electrondevops",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "electrondevops a minimal Electron application",
   "build": {
     "appId": "digital.lifeforce.electrondevops",
@@ -37,7 +37,6 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "dependencies": {
-    "cross-env": "^7.0.3",
     "electron-log": "^4.3.1",
     "electron-updater": "^4.3.5",
     "electron-util": "^0.14.2",

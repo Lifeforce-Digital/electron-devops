@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain  } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
 import updateApp from "./updater";
@@ -66,3 +66,7 @@ app.on('ready', async () => {
   mainWindow = await createMainWindow()
   updateApp();
 })
+
+ipcMain.on('app_version', (event) => {
+  event.sender.send('app_version', { version: app.getVersion() });
+});

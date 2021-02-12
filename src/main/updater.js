@@ -22,6 +22,15 @@ export default async function updateApp() {
 
 			dialog.showMessageBox(null, options);
 			await autoUpdater.checkForUpdatesAndNotify();
+			const completedOptions = {
+				type: 'info',
+				buttons: [],
+				title: 'Completed',
+				message: 'Updating the App Completed',
+
+			};
+
+			dialog.showMessageBox(null, completedOptions);
 		} catch (err) {
 			// Ignore errors thrown because user is not connected to internet
 			if (err.message !== "net::ERR_INTERNET_DISCONNECTED") {
