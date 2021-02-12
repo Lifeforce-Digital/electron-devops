@@ -3,13 +3,14 @@
 import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
+import updateApp from "./updater";
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow
 
-function createMainWindow() {
+async function createMainWindow() {
   const window = new BrowserWindow({webPreferences: {nodeIntegration: true}})
 
   if (isDevelopment) {
@@ -17,15 +18,16 @@ function createMainWindow() {
   }
 
   if (isDevelopment) {
-    window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
+    await window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
   }
   else {
-    window.loadURL(formatUrl({
+    await window.loadURL(formatUrl({
       pathname: path.join(__dirname, 'index.html'),
       protocol: 'file',
       slashes: true
     }))
   }
+
 
   window.on('closed', () => {
     mainWindow = null
@@ -56,9 +58,11 @@ app.on('activate', () => {
   }
 })
 
-const autoUpdater = require("electron-updater");
 // create main BrowserWindow when electron is ready
-app.on('ready', () => {
-  autoUpdater.checkForUpdatesAndNotify();
-  mainWindow = createMainWindow()
+app.on('ready', async () => {
+  // Wait for Electron to be initialized
+	await app.whenReady();
+  // Create and show BrowserWindow
+  mainWindow = await createMainWindow()
+  updateApp();
 })
