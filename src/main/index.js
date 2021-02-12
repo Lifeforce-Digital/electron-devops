@@ -3,7 +3,7 @@
 import { app, BrowserWindow, ipcMain  } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
-const appVersion = require('../../package.json');
+const appVersion = '0.0.12';
 // import updateApp from "./updater";
 
 const log = require('electron-log');
@@ -23,8 +23,7 @@ function sendStatusToWindow(text) {
   mainWindow.webContents.send('message', text);
 }
 function sendVersion() {
-  log.info(`Version of the app ${appVersion.version}`);
-  mainWindow.webContents.send('version', appVersion.version);
+  mainWindow.webContents.send('version', appVersion);
 }
 
 async function createMainWindow() {
