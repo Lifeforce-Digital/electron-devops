@@ -1,57 +1,43 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const path = require('path');
 
 module.exports = {
-
-    watch: true,
-
-    target: 'electron-renderer',
-
-    entry: './src/renderer/index.js',
-
-    output: {
-        path: __dirname + '/build',
-        publicPath: 'build/',
-        filename: 'bundle.js'
-    },
-
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                loader: 'babel-loader',
-                options: {
-                    presets: ['react']
-                }
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                  loader: 'css-loader',
-                  options: {
-                    modules: true
-                  }
-                })
-            },
-            {
-                test: /\.(png|jpg|gif|svg)$/,
-                loader: 'file-loader',
-                query: {
-                    name: '[name].[ext]?[hash]'
-                }
-            }
-        ]
-    },
-
-    plugins: [
-        new ExtractTextPlugin({
-            filename: 'bundle.css',
-            disable: false,
-            allChunks: true
+        target: 'electron-renderer',
+        entry: './src/renderer/index.js',
+        output: {
+            filename: 'bundle.js',
+            path: path.resolve(__dirname, 'build'),
+        },
+        module: {
+                rules: [
+                    {
+                        test: /\.jsx?$/,
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/react']
+                        }
+                    },
+                    {
+                        test: /\.css$/i,
+                        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                    },
+                    {
+                        test: /\.(png|jpg|gif|svg)$/,
+                        loader: 'file-loader',
+                        query: {
+                            name: '[name].[ext]?[hash]'
+                        }
+                    }
+                ]
+        },
+      plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'bundle.css'
         })
     ],
 
     resolve: {
       extensions: ['.js', '.json', '.jsx']
     }
-
-}
+};
