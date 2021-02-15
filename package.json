@@ -1,6 +1,6 @@
 {
   "name": "electrondevops",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "electrondevops a minimal Electron application",
   "build": {
     "appId": "digital.lifeforce.electrondevops",
@@ -26,7 +26,7 @@
     "compile": "electron-webpack",
     "postinstall": "electron-builder install-app-deps",
     "release": "electron-builder --windows --publish always",
-    "build": "npm run compile"
+    "build": "yarn run compile"
 
   },
   "dependencies": {
