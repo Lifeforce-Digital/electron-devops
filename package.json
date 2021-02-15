@@ -1,6 +1,6 @@
 {
   "name": "electrondevops",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "electrondevops a minimal Electron application",
   "build": {
     "appId": "digital.lifeforce.electrondevops",
@@ -18,43 +18,38 @@
       "category": "Office"
     }
   },
+  "license": "MIT",
+  "repository": "https://github.com/Lifeforce-Digital/electron-devops",
+  "author": "Saibal Roy",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "npm run bundle && electron-webpack dev",
+    "dev": "electron-webpack dev",
     "compile": "electron-webpack",
     "postinstall": "electron-builder install-app-deps",
-    "release": "electron-builder --mac --windows --linux --publish always",
-    "bundle": "webpack --mode production",
+    "release": "electron-builder --windows --publish always",
     "build": "npm run compile"
+
   },
-  "repository": "https://github.com/Lifeforce-Digital/electron-devops",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
   "dependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
     "electron-log": "^4.3.1",
     "electron-updater": "^4.3.5",
-    "electron-util": "^0.14.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "source-map-support": "^0.5.16"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.12.13",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.2",
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "^5.0.2",
     "electron": "8.2.0",
     "electron-builder": "^22.4.1",
     "electron-webpack": "^2.8.2",
-    "mini-css-extract-plugin": "^1.3.6",
     "webpack": "~4.42.1"
+  },
+  "electronWebpack": {
+    "renderer": {
+      "sourceDirectory": "src/renderer",
+      "template": "src/renderer/index.html"
+    }
   }
 }

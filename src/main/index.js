@@ -1,10 +1,10 @@
 'use strict'
 
-import { app, BrowserWindow, ipcMain  } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
-const appVersion = '0.0.14';
-// import updateApp from "./updater";
+
+const appVersion = '0.0.15';
 
 const log = require('electron-log');
 const {autoUpdater} = require("electron-updater");
@@ -13,10 +13,13 @@ autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
 
+
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow
+
 
 function sendStatusToWindow(text) {
   log.info(text);
@@ -26,29 +29,25 @@ function sendVersion() {
   mainWindow.webContents.send('version', appVersion);
 }
 
-async function createMainWindow() {
+
+
+function createMainWindow() {
   const window = new BrowserWindow({webPreferences: {nodeIntegration: true}})
 
   if (isDevelopment) {
     window.webContents.openDevTools()
   }
 
-  // if (isDevelopment) {
-  //   await window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
-  // }
-  // else {
-  //   await window.loadURL(formatUrl({
-  //     pathname: path.join(__dirname, 'index.html'),
-  //     protocol: 'file',
-  //     slashes: true
-  //   }))
-  // }
-
-  await window.loadURL(formatUrl({
-      pathname: path.join(`index.html`),
+  if (isDevelopment) {
+    window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
+  }
+  else {
+    window.loadURL(formatUrl({
+      pathname: path.join(__dirname, 'index.html'),
       protocol: 'file',
       slashes: true
     }))
+  }
 
   window.on('closed', () => {
     mainWindow = null
@@ -61,8 +60,16 @@ async function createMainWindow() {
     })
   })
 
+  // Blur window when close o loses focus
+  window.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.send('ping', '🤘');
+    sendVersion();
+  });
+
   return window
 }
+
+
 
 autoUpdater.on('checking-for-update', () => {
   sendStatusToWindow('Checking for update...');
@@ -86,6 +93,7 @@ autoUpdater.on('update-downloaded', (info) => {
   sendStatusToWindow('Update downloaded');
 });
 
+
 // quit application when all windows are closed
 app.on('window-all-closed', () => {
   // on macOS it is common for applications to stay open until the user explicitly quits
@@ -107,8 +115,9 @@ app.on('ready', async () => {
 	await app.whenReady();
   // Create and show BrowserWindow
   mainWindow = await createMainWindow()
-  sendVersion();
+
   // updateApp();
   autoUpdater.checkForUpdatesAndNotify();
 })
+
 
