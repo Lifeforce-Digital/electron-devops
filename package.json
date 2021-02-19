@@ -1,6 +1,6 @@
 {
   "name": "electrondevops",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "electrondevops a minimal Electron application",
   "build": {
     "appId": "digital.lifeforce.electrondevops",
@@ -29,7 +29,7 @@
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
     "postinstall": "electron-builder install-app-deps",
-    "release": "electron-builder --windows --publish always",
+    "release": "electron-builder --mac --windows --linux --publish always",
     "build": "yarn run compile"
 
   },
