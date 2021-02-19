@@ -4,7 +4,7 @@ import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
 
-const appVersion = '0.0.17';
+const appVersion = '0.0.18';
 
 const log = require('electron-log');
 const {autoUpdater} = require("electron-updater");

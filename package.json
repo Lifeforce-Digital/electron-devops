@@ -1,6 +1,6 @@
 {
   "name": "electrondevops",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "electrondevops a minimal Electron application",
   "build": {
     "appId": "digital.lifeforce.electrondevops",
@@ -16,6 +16,10 @@
         "AppImage"
       ],
       "category": "Office"
+    },
+    "publish": {
+      "provider": "s3",
+      "bucket": "desktop-electron-releases"
     }
   },
   "license": "MIT",
