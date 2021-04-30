@@ -34,7 +34,7 @@
 
   },
   "dependencies": {
-    "@babel/core": "^7.12.16",
+    "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.12.16",
     "@babel/preset-react": "^7.12.13",
     "babel-loader": "^8.2.2",
